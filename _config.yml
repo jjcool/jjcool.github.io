@@ -2,7 +2,7 @@ title: Streamvar Analytics
 lang: en
 description: Opinionated github flavored standard document theme for open source projects, with few options, but everything!
 
-theme: null
+remote_theme: rundocs/jekyll-rtd-theme
 
 # debug:
 #   compress: false
