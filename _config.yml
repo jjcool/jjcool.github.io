@@ -1,18 +1,36 @@
-title: Your awesome title
+title: Streamvar Analytics
 lang: en
-description: Write an awesome description for your new site here
+description: Streamvar theme
+
 
 remote_theme: rundocs/jekyll-rtd-theme
+
 
 readme_index:
   with_frontmatter: true
 
-exclude:
-  - Makefile
-  - Gemfile
-  - Gemfile.lock
+asciidoc: {}
+asciidoctor:
+  base_dir: :docdir
+  safe: unsafe
+  attributes:
+    - idseparator=_
+    - icons=font
 
 plugins:
   - jemoji
   - jekyll-avatar
   - jekyll-mentions
+  - jekyll-redirect-from
+exclude:
+  - Makefile
+  - CNAME
+  - Gemfile
+  - Gemfile.lock
+  - LICENSE
+  - requirements.txt
+  - node_modules
+  - package.json
+  - package-lock.json
+  - webpack.config.js
+  - jekyll-rtd-theme.gemspec
