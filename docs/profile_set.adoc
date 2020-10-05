@@ -1,0 +1,45 @@
+[[profile-set]]
+=== Profile Set
+This section contains the profile related information of each data source.
+
+*Profile (can be multiple)*: To define a profile, provide profile name and profile alias.
+
+[source,gherkin]
+----
+include::code/sample.feature[tag=profile]
+----
+
+*Variable calculation support for given discrete time window* +
+This is to specify the window in which the on-demand variable calculation can be performed. If the value specified is 30 then the on-demand variable calculation can be done only for the period ( last transaction period - 30 to last transaction period)
+
+[source,gherkin]
+----
+include::code/sample.feature[tag=history]
+----
+
+[NOTE]
+Time unit for the retrospective variable request window can only be specified in months
+
+*Date Format*: To specify the date field in the input data set and date format. Follow this https://www.joda.org/joda-time/key_format.html[link] for supported formats.
+
+[source,gherkin]
+----
+include::code/sample.feature[tag=date]
+----
+
+*Reference(processing) time zone*:
+The default time zone will be UTC. if the processing needs to be done in different time zone then that timezone can be specified using below gherkin statement
+[source,gherkin]
+----
+include::code/sample.feature[tag=timeZone]
+----
+
+
+The full list of time zones is available https://www.joda.org/joda-time/timezones.html[here]
+
+* If profile update time zone is not specified in the feature file : then default time zone will be set as “UTC”
+* If profile update time zone is specified in the feature file
+** When input date format also has time zone
+*** Then  offset calculation will happen with reference to the update time zone respecting the input record time zone
+** When input date format does not have time zone.
+*** Then input date will be assumed to be in the same time zone as the profile update time zone

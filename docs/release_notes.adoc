@@ -1,0 +1,184 @@
+=== v0.11.0
+
+- Runtime Dependencies
+* stream-var v1.16.0
+* sv-exec v3.6.0
+* stream-engine v1.16.0
+
+- High level features
+* Profile Variables chaining
+* Segmented Scoring
+* Support for nested payload
+
+- Features
+* Allow stateful variables to depend on other stateful variables
+* Support Nested Fields in Input Sets
+* Implement partitioning scheme for higher order profiled variables
+* Implement DSL step for flattening and/or hoisting nested fields in the input set
+* Enhance test framework for integration testing of MDK produced variables
+* Add support for multiple scoring models within the DSL
+* Add support for segmented scores within the DSL
+* Allow users to configure statements for stateless variables within variable sets for stateful variables
+* Exceptions encountered during model step initialization must be caught and propagated back in the errors section of the SV Container Record
+
+
+=== v0.10.0
+
+- Runtime Dependencies
+* stream-var v1.15.2
+* sv-exec v1.3-SNAPSHOT
+* stream-engine v1.15.2
+
+- High level features
+* Generic cross-profile and cross-datasource variable calculation to enable complicated behavioural profile enrichment and relationship profile enrichment
+* Quantile Estimation-based outlier detection with three (3) QE algorithms based on Falcon QE, Adaptive Grid with Event Decay, and Adaptive Tierney-based QE
+* Multi-Layer Self Calibrating (MLSC) anomaly detection scoring models that combine multiple QE-based outlier detection inputs and scale gracefully from unsupervised to semi-supervised ML/AI
+* Explicit, user-designed on-demand variable request records and corresponding output records to support expressive access to cross-profile record contents, variable calculation and scoring on-demand.
+
+- Features
+* Partition the DAG for cross profile variables
+* Move date fields into the Profile Set and allow for pre-processed date variables
+* Support Cross Datasource Variables Involving Chained Profile Lookups
+* Move Profile Key Specification Out of the Input Set
+* Move Output Specification out of the Input Set to the Output Set
+* Support for ProfileID to be preprocessing variable
+* Complete re-inclusion of cross profile variables into the new code
+* Combine Kitchen Sink Builders For Stateful and Stateless Variables
+* Jackson-serialized JSON output of StreamVar models contains semi-duplicate JSON properties when variable name starts with capital letter
+* Replace all references to "datasource" and "data source" in DSL step definitions with "input record"
+* Add support for QE variables in the DSL
+* Add support for full form statements for blist variables
+* Make score and reasons field names configurable via the DSL
+* Support DSL statement for calculating the QuantileEstimate and logOddCDF
+* The MDK compiler must error out upon encountering duplicate variable names
+* Include cross profile and cross data source variable nodes in the AST
+
+- Bug Fixes
+* Fix Name Collision when Passing Header Fields to the Scoring Model
+* Jackson-serialized JSON output of StreamVar models contains semi-duplicate JSON properties when variable name starts with capital letter
+* The compiler must error out when a configured variable cannot be compiled while using the DSL step select 'all' values
+* The parser must error out upon encountering null values in non-nullable primitive fields
+
+=== v0.9.2
+
+- Runtime Dependencies
+* stream-var v1.15.2
+* sv-exec v1.3-SNAPSHOT
+* stream-engine v1.15.2
+
+
+- Features/Bug fix
+* Contains work-around to DMP defect(https://jira.fico.com/browse/DMPR-40115[DMPR-40115]: BTM cannot load classes contained in one JAR inside a StreamVar MAR model/lib/io which have dependencies contained in another JAR in the same StreamVar MAR model/lib/io)
+
+=== v0.9.1
+
+- Runtime Dependencies
+* stream-var v1.15.2
+* sv-exec v1.3-SNAPSHOT
+* stream-engine v1.15.2
+
+- Features
+* Remove support for build_jar and execute_jar in favor of build_mar and execute_mar
+* Package code-generated custom deserializer with IO records in the model/lib/io directory
+* JSON output supports Jackson default behavior for serialization of NaN, Infinity and -Infinity
+* Update integration test suite of feature files with additional v0.9.x features
+
+- Bug Fixes
+* Kotlin Poet library upgrade changed line wrapping in generated code, resulting in possible compilation error when StreamVar Variable category names have whitespace
+* Report simple Type name in response to schema request rather than Kotlin Type
+* Error and warning validation should be supported only when on-demand variable requests contain the field(s) on which the validation is performed
+* Json output field names should be modeler-overridden display names (if used), not standardized/sanitized names
+* SE API SVContainerRecord addWarnings() doesn't match behavior of StreamVar Core API SVContainerRecord
+
+=== v0.9.0
+
+- Runtime Dependencies
+* stream-var v1.15.0
+* sv-exec v1.3-SNAPSHOT
+* stream-engine v1.15.0
+- Features
+* Implement exception handling with DSL-based specification of conditional errors and warnings
+* Support for UDFs that return lists of errors and warnings
+* Model input records containing an element in the "errors" list will immediately return and bypass further processing
+* Partition exception handling to front of model step ahead of profile record mutating logic and break model step if any exceptions
+* Let StreamVar DSL-authored models output SVContainerRecord type records
+* StreamVar MDK code-generates custom BTM-compatible deserializers for each input record type for BTM driven parsing of multiple inputs
+* Interleave pre-processing, profile updates, stateful calculation and post processing in one model step
+* Extend allowed maximum for number of variables to ~ 1500 per (event type, profile type) pair
+* Move IO record format from the Background to the Input Set
+* Support use of ConfigurableScoringModelStep with SVContainerRecord input and output in StreamVar DSL-integrated ScoringModels
+* Flatten StreamVar Base Maps for improved operational performance
+* Introduce support for numeric literals as lookup table keys
+* Recency and Penultimate Recency variables to take time window in consideration
+* Allow constant Field access in StreamVar calculate Post processing step
+
+- Bug Fixes
+* Fix cases where Error Response was not valid JSON
+* Fix stateless negation of boolean field
+
+- Documentation
+* Add documentation for error codes and error handling
+* Audit and Document use of special values in StreamVar variables
+* Remove special value table row in SV User Manual Appendix for StreamVar variable types that do not return special values
+
+=== v0.8.1
+
+- Runtime Dependencies
+* stream-var v1.14.1
+* sv-exec v1.3-SNAPSHOT
+* stream-engine v1.14.1
+
+- Features
+* Allow users to configure Falcon Reason Reporter reason models via the DSL [TSV-399]
+
+- Enhancements
+* Make the mdk usable from any directory. Now users will not have to _cd_ into the mdk root to build/execute mars [SES-57]
+* Remove Maven from the list of environment requirements [SES-57, TSV-400]
+* Make Java version requirement (v1.8.0_X) strict and add checks for it [TSV-289]
+* Update documentation [TSV-398]
+
+*StreamVar -*
+
+- Version 1.14.0
+* FalconReasonReporter: New class that brings the GRL Falcon reason code algorithm to StreamVar.
+* ExplainableScoringAdapter: New class that unifies FeedForwardNetwork scoring and a configurable reason code model in a single function call. Currently supports both FalconReasonReporter and the FFN incorporated reason code models.
+* BlistWeighted now resolves tiebreakers in the same way as in GRL, favoring the more senior element of the list over a newly inserted element.
+* Bug fix: QeTimeDecay no longer produces an exception if timeSinceStart is zero.
+
+- Version 1.14.1
+* Fixed bug in parsing of reason bin configuration parsing that would occur in certain cases.
+
+*StreamEngine Model API -*
+
+- SerializedClassesProvider: This new interface is intended to replace the “serializedClasses” list in the model configuration. Instead, this interface should be implemented by a model and the name of the implementing class be supplied through the “serializedClassesProviderClassName” configuration element. This is now the preferred way of listing serialized classes, as it will work in the case where some of the serialized classes have their names changed by an obfuscator during the build process.
+
+*StreamEngine Provided Model Steps -*
+
+- The ConfigurableScoringStep now supports reason codes generated by FalconReasonReporter.
+- ConfigurableScoringStep no longer requires that the output record extend from ScoreReasonRecord. Instead, the names of the fields in the output record for the score and list of reason codes (if applicable) must be supplied with the “outputScoreFieldName” and “outputReasonsFieldName” elements respectively.
+
+
+=== v0.8.0
+-	Runtime Dependencies
+* stream-var v1.13.2
+* sv-exec v1.3-SNAPSHOT
+* stream-engine v1.13.2
+
+-	Features
+* Allow users to provide custom functions for stateless variables (UDFs) using Kotlin scripts [FCS-85]
+* Support mixed time discretization for optimized profile sizes; time discretization unit can now be defined per long-form variable and per variable explosion unit [FCS-247]
+* Implement new types of stateless transformations/operations
+** Ternary operator for checking if numeric (~isNan) [FCS-140, SES-45]
+** Ternary operator for checking if finite ( ~isInF) [FCS-140]
+* Update documentation [FCS-366]
+
+-	Enhancements
+* Let retrospective look-backs for variable requests be specified per data source using time units of months [FCS-247]
+* Expand regexes of full form statements for easier auto-completion of Gherkin steps [FCS-360]
+* Extend allowed limit for number of pre-processed variables to more than 256 [FCS-345]
+* Extend limit for number of input fields to 256 [SES-47]
+
+-	Bug Fixes
+* Fix the truncation operator to work for precision values other than 3 [SES-46]
+* Fix the returned data types of the recency and penultimate recency variable classes [FCS-363]
+* Perform comparison between doubles (><= etc.) in the stateless comparison variables fuzzily using an epsilon value of 10^-6 [FCS-241, SES-42]

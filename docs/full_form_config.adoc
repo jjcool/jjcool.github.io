@@ -1,0 +1,19 @@
+[[full-form-variable]]
+=== Variable Explosion using Full Form
+
+StreamVar supports full form gherkin statements (SVL) to calculate profiled variables.
+
+[source,gherkin]
+---------
+include::code/sample.feature[tag=fullform]
+---------
+
+To provide lag time in the full form dsl statement append *lagged by <timeInterval> "<timeUnit>"* at the end of the dsl statement.
+
+    Variable Set:
+    Calculate profiled variables for the "account" when the input datasource is "Accounts"
+    Add "rv3047" as the number of periods of observing "  'Grocery'" in "merchantType" category over 5 "days" lagged by 1 "day"
+    Add "rv3048" as the number of consecutive periods including recent of observing "  'Grocery'" in "merchantType" category over 5 "days" lagged by 1 "day"
+    Add "rv3049" as the maximum number of consecutive periods of observing "  'Grocery'" in "merchantType" category over 5 "days" lagged by 1 "day"
+
+NOTE: List of all the full form supported variable is provided <<variable-functions,here>>

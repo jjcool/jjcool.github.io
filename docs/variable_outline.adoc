@@ -1,0 +1,50 @@
+---
+title: "variable-explosion"
+linkTitle: "variable-explosion"
+date: 2017-02-05
+description: >
+  A short lead description about this content page. It can be **bold** or _italic_ and can be split over multiple paragraphs.
+---
+
+[[variable-explosion]]
+=== Variable Explosion
+This section is to specify the configurations to generate the required profile variables.  This includes specifying the fields, time increments and category fields and variable functions to calculate variables for a given profile and data source.
+
+[source,gherkin]
+----
+include::code/sample.feature[tag=variableoutline]
+----
+
+* *Variable Functions and Profile* : Specify the profile name(*account*), data source(*Accounts*) and a table(*Variables table in bottom*) consisting of the required functions to generate profile variables. A list of all the functions provided <<variable-functions,here>>.
+
+* *Numeric Fields* : Numeric fields will be used in the variable function for calculation. This can be any of the input field or prepared field (generated in pre-processing step).
+
+* *Time increment, lag and time unit* : This table specifies the time spans for which variables need to be calculated. Time span for the calculation will be considered from the date field in the input record ( query date in case of variable request record) till the last <N> discrete time that is provided in the time_increment. For details refer to <<time-discretization,Time Discretization>>
+
+* *Category Filter* : This is to specify the event for which the variable calculation is to be performed. It supports Input fields and prepared fields.
+
+** *Categorical_field* – category field for which the calculation will happen
+** *values_of_interest* – aggregations will happen only for the given values of interest
+
+include::var_explosion_config.adoc[]
+
+=== Blist Variables
+[red]*provide description*
+
+Below is sample gherkin configuration for the blist variables
+
+[source,gherkin]
+----
+include::code/sample.feature[tag=blist]
+----
+
+
+The above configuration will profile 3 blists :
+
+*   For merchant code - the blist is only updated when "merchantIscash" = "Yes" +
+*   For merchant code - the blist is only updated when "groceryOrGas" = "No" +
+*   For posEntryMode - the blist is always updated
+
+include::full_form_config.adoc[]
+
+<<<

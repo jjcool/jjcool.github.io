@@ -1,0 +1,5 @@
+=== Variable Data Type Info
+
+Schema Record will now have the variables name along with their data type information. Variable name will be - *<Var_Name>:<DataType>*
+
+    {"source":"SchemaResponse","payload":"Accounts:String,accountid:String,date:String,merchantTypeLuxury:Boolean,merchantTypeAirline:Boolean,luxuryOrAirline:Boolean,amountGt500:Boolean}

@@ -1,0 +1,583 @@
+[[minimum]]
+.Minimum
+[cols="20h,80",stripes=none]
+|=====================
+|Function|MINIMUM_BY_CATEGORY
+|Full Form Statement |"<varname>" as the minimum of "<numericalField>" where "<categoryField>" is "<categoryValue>" over <timeInterval> "<timeUnit>"
+|Example |"rv3002" as the minimum of "amount" where "merchantType" is "FastFood" over 5 "days"
+|Output variable name in explosion |<profile_name>_<numericalField>:<categoryField>_<categoryValue>:min_<N><discreteTimeUnit>
+|Output variable name example|account_amount:merchantIsCash_Yes:min_5D
+|Special Value |NaN if no transaction has happened for the given time window
+|=====================
+
+
+[[overall_minimum]]
+.Overall Minimum
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_MINIMUM
+|Full Form Statement|"<varname>" as the overall minimum of "<numericalField>" over <timeInterval> "<timeUnit>"
+|Example|"rv3013" as the overall minimum of "amount" over 5 "days"
+|Output variable name in explosion|<profile_name>_<numericalField>:all:min_<N><discreteTimeUnit>
+|Output variable name example|account_amount:all:min_5D
+|Special Value |NaN if no transaction has happened for the given time window
+|=====================
+
+
+[[maximum]]
+.Maximum
+[cols="20h,80",stripes=none]
+|=====================
+|Function|MAXIMUM_BY_CATEGORY
+|Full Form Statement|"<varname>" as the maximum of "<numericalField>" where "<categoryField>" is "<categoryValue>" over <timeInterval> "<timeUnit>"
+|Example|"rv3017" as the maximum of "amount" where "merchantType" is "FastFood" over 5 "days"
+|Output variable name in explosion|<profile_name>_<numericalField>:<categoryField>_<categoryValue>:max_<N><discreteTimeUnit>
+|Output variable name example|account_amount:merchantIsCash_Yes:max_5D
+|Special Value |NaN if no transaction has happened for the given time window
+|=====================
+
+
+[[overall_maximum]]
+.Overall Maximum
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_MAXIMUM
+|Full Form Statement|"<varname>" as the overall maximum of "<numericalField>" over <timeInterval> "<timeUnit>"
+|Example|"rv3021" as the overall maximum of "amount" over 5 "days"
+|Output variable name in explosion|<profile_name>_<numericalField>:all:max_<N><discreteTimeUnit>
+|Output variable name example|account_amount:all:max_5D
+|Special Value |NaN if no transaction has happened for the given time window
+|=====================
+
+
+[[sum]]
+.Sum
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SUM_BY_CATEGORY
+|Full Form Statement|"<varname>" as the sum of "<numericalField>" where "<categoryField>" is "<categoryValue>" over <timeInterval> "<timeUnit>"
+|Example|"rv3025" as the sum of "amount" where "merchantType" is "FastFood" over 5 "days"
+|Output variable name in explosion|<profile_name>_<numericalField>:<categoryField>_<categoryValue>:sum_<N><discreteTimeUnit>
+|Output variable name example|account_amount:merchantIsCash_Yes:sum_5D
+|=====================
+
+
+[[overall_sum]]
+.Overall Sum
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_SUM
+|Full Form Statement|"<varname>" as the sum of "<numericalField>" where "<categoryField>" is "<categoryValue>" over <timeInterval> "<timeUnit>"
+|Example|"rv3026" as the sum of "amount" where "merchantType" is "FastFood" over 5 "days"
+|Output variable name in explosion|<profile_name>_<numericalField>:all:sum_<N><discreteTimeUnit>
+|Output variable name example|account_amount:all:sum_5D
+|=====================
+
+
+[[frequency]]
+.Frequency
+[cols="20h,80",stripes=none]
+|=====================
+|Function|FREQUENCY_BY_CATEGORY
+|Full Form Statement|"<varname>" as the number of occurrences of "<categoryValue>" in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3105" as the number of occurrences of "Grocery" in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>_<categoryValue>:freq_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash_Yes:freq_5D
+|=====================
+
+
+[[overall_frequency]]
+.Overall Frequency
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_FREQUENCY
+|Full Form Statement|"<varname>" as the number of non-missing occurrences of "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3109" as the number of non-missing occurrences of "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:freq_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:freq_5D
+|=====================
+
+
+[[stddev]]
+.Standard Deviation
+[cols="20h,80",stripes=none]
+|=====================
+|Function|STDDEV_BY_CATEGORY
+|Full Form Statement|"<varname>" as the standard deviation of "<numericalField>" where "<categoryField>" is "<categoryValue>" over <timeInterval> "<timeUnit>"
+|Example|"rv3033" as the standard deviation of "amount" where "merchantType" is "FastFood" over 5 "days"
+|Output variable name in explosion|<profile_name>_<numericalField>:<categoryField>_<categoryValue>:std_dev_<N><discreteTimeUnit>
+|Output variable name example|account_amount:merchantIsCash_Yes:std_dev_5D
+|=====================
+
+
+[[overall_stddev]]
+.Overall Standard Deviation
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_STDDEV
+|Full Form Statement|"<varname>" as the overall standard deviation of "<numericalField>" over <timeInterval> "<timeUnit>"
+|Example|"rv3037" as the overall standard deviation of "amount" over 5 "days"
+|Output variable name in explosion|<profile_name>_<numericalField>:all:std_dev_<N><discreteTimeUnit>
+|Output variable name example|account_amount:all:std_dev_5D
+|=====================
+
+
+[[time_average]]
+.Time Average
+[cols="20h,80",stripes=none]
+|=====================
+|Function|TIME_AVERAGE_BY_CATEGORY
+|Full Form Statement|"<varname>" as the time average of "<numericalField>" where "<categoryField>" is "<categoryValue>" over <timeInterval> "<timeUnit>"
+|Example|"rv3041" as the time average of "amount" where "merchantType" is "FastFood" over 5 "days"
+|Output variable name in explosion|<profile_name>_<numericalField>:<categoryField>_<categoryValue>:time_avg_<N><discreteTimeUnit>
+|Output variable name example|account_amount:merchantIsCash_Yes:time_avg_5D
+|=====================
+
+
+[[overall_time_average]]
+.Overall Time Average
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_TIME_AVERAGE
+|Full Form Statement|"<varname>" as the overall time average of "<numericalField>" over <timeInterval> "<timeUnit>"
+|Example|"rv3045" as the overall time average of "amount" over 5 "days"
+|Output variable name in explosion|<profile_name>_<numericalField>:all:time_avg_<N><discreteTimeUnit>
+|Output variable name example|account_amount:all:time_avg_5D
+|=====================
+
+
+[[event_average]]
+.Event Average
+[cols="20h,80",stripes=none]
+|=====================
+|Function|EVENT_AVERAGE_BY_CATEGORY
+|Full Form Statement|"<varname>" as the event average of "<numericalField>" where "<categoryField>" is "<categoryValue>" over <timeInterval> "<timeUnit>"
+|Example|"rv3001" as the event average of "amount" where "merchantType" is "FastFood" over 5 "days"
+|Output variable name in explosion|<profile_name>_<numericalField>:<categoryField>_<categoryValue>:event_avg_<N><discreteTimeUnit>
+|Output variable name example|account_amount:merchantIsCash_Yes:event_avg_5D
+|=====================
+
+
+[[overall_event_average]]
+.Overall Event Average
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_EVENT_AVERAGE
+|Full Form Statement|"<varname>" as the overall event average of "<numericalField>" over <timeInterval> "<timeUnit>"
+|Example|"rv3005" as the overall event average of "amount" over 5 "days"
+|Output variable name in explosion|<profile_name>_<numericalField>:all:event_avg_<N><discreteTimeUnit>
+|Output variable name example|account_amount:all:event_avg_5D
+|=====================
+
+
+[[recency]]
+.Recency
+[cols="20h,80",stripes=none]
+|=====================
+|Function|RECENCY_BY_CATEGORY
+|Full Form Statement|"<varname>" as the periods since occurrence of "<categoryValue>" in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3113" as the periods since occurrence of "Grocery" in "merchantType" category over 5 "days"
+|Output variable name in explosion| <profile_name>:<categoryField>_<categoryValue>:recency_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash_Yes:recency_5D
+|Special Value |-1 if no transaction has happened for given time window
+|=====================
+
+
+[[overall_recency]]
+.Overall Recency
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_RECENCY
+|Full Form Statement|"<varname>" as the periods since occurrence of non-missing values in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3117" as the periods since occurrence of non-missing values in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:recency_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:recency_5D
+|Special Value |-1 if no transaction has happened for given time window
+|=====================
+
+
+[[penultimate_recency]]
+.Penultimate Recency
+[cols="20h,80",stripes=none]
+|=====================
+|Function|PENULTIMATE_RECENCY_BY_CATEGORY
+|Full Form Statement|"<varname>" as the periods since the penultimate occurrence of "<categoryValue>" in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3121" as the periods since the penultimate occurrence of "Grocery" in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>_<categoryValue>:pen_recency_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash_Yes:pen_recency_5D
+|Special Value |-1 if one or less transactions have happened for given time window
+|=====================
+
+
+[[overall_penultimate_recency]]
+.Overall Penultimate Recency
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_PENULTIMATE_RECENCY
+|Full Form Statement|"<varname>" as the periods since the penultimate occurrence of non-missing values in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3125" as the periods since the penultimate occurrence of non-missing values in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:pen_recency_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:pen_recency_5D
+|Special Value |-1 if one or less transactions have happened for given time window
+|=====================
+
+
+[[unique_val_count]]
+.Unique Value Count
+[cols="20h,80",stripes=none]
+|=====================
+|Function|UNIQUE_VALUES_COUNT
+|Full Form Statement|"<varname>" as the number of distinct occurrences of "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3133" as the number of distinct occurrences of "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:uniq_count_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:uniq_count_5D
+|=====================
+
+
+[[latest_value]]
+.Latest Value
+[cols="20h,80",stripes=none]
+|=====================
+|Function|LATEST_VALUE_FOR_FIELD
+|Full Form Statement|"<varname>" as the last seen value of "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3129" as the last seen value of "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:latest_value_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:latest_value_5D
+|=====================
+
+
+[[max_consec_streak]]
+.Max Consec Streak
+[cols="20h,80",stripes=none]
+|=====================
+|Function|MAXIMUM_CONSECUTIVE_STREAK_BY_CATEGORY
+|Full Form Statement|"<varname>" as the maximum number of consecutive periods of observing "<categoryValue>" in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3065" as the maximum number of consecutive periods of observing "Grocery" in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>_<categoryValue>:max_consec_streak_<N><discreteTimeUnit>
+|Output variable name example|account:nonWorkingHoursSpendingOnMerchandise_Y:max_consec_streak_5D
+|=====================
+
+
+[[overall_max_consec_streak]]
+.Overall Min Consec Streak
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_MAXIMUM_CONSECUTIVE_STREAK
+|Full Form Statement|"<varname>" as the maximum number of consecutive periods of observing non-missing values in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3069" as the maximum number of consecutive periods of observing non-missing values in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:max_consec_streak_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:max_consec_streak_5D
+|=====================
+
+
+[[min_consec_streak]]
+.Min Consec Streak
+[cols="20h,80",stripes=none]
+|=====================
+|Function|MINIMUM_CONSECUTIVE_STREAK_BY_CATEGORY
+|Full Form Statement|"<varname>" as the minimum number of consecutive periods of observing "<categoryValue>" in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3073" as the minimum number of consecutive periods of observing "Grocery" in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>_<categoryValue>:min_consec_streak_<N><discreteTimeUnit>
+|Output variable name example|account:nonWorkingHoursSpendingOnMerchandise_Y:min_consec_streak_5D
+|=====================
+
+
+[[overall_min_consec_streak]]
+.Overall Mini Consec Streak
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_MINIMUM_CONSECUTIVE_STREAK
+|Full Form Statement|"<varname>" as the minimum number of consecutive periods of observing non-missing values in "<categoryField>" category over <timeInterval> "days"
+|Example|"rv3077" as the minimum number of consecutive periods of observing non-missing values in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:min_consec_streak_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:min_consec_streak_5D
+|=====================
+
+
+[[max_delta_time]]
+.Max Delta Time
+[cols="20h,80",stripes=none]
+|=====================
+|Function|MAXIMUM_DELTA_TIME_BY_CATEGORY
+|Full Form Statement|"<varname>" as the maximum number of periods between two occurrences of "<categoryValue>" in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3089" as the maximum number of periods between two occurrences of "Grocery" in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>_<categoryValue>:max_delta_time_<N><discreteTimeUnit>
+|Output variable name example|account:nonWorkingHoursSpendingOnMerchandise_Y:max_delta_time_5D
+|=====================
+
+
+[[overall_max_delta_time]]
+.Overall Max Delta Time
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_MAXIMUM_DELTA_TIME
+|Full Form Statement|"<varname>" as the maximum number of periods between two non-missing occurrences of "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3093" as the maximum number of periods between two non-missing occurrences of "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:max_delta_time_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:max_delta_time_5D
+|=====================
+
+
+[[min_delta_time]]
+.Min Delta Time
+[cols="20h,80",stripes=none]
+|=====================
+|Function|MINIMUM_DELTA_TIME_BY_CATEGORY
+|Full Form Statement|"<varname>" as the minimum number of periods between two occurrences of "<categoryValue>" in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3081" as the minimum number of periods between two occurrences of "Grocery" in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>_<categoryValue>:min_delta_time_<N><discreteTimeUnit>
+|Output variable name example|account:nonWorkingHoursSpendingOnMerchandise_Y:min_delta_time_5D
+|=====================
+
+
+[[overall_min_delta_time]]
+.Overall Min Delta Time
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_MINIMUM_DELTA_TIME
+|Full Form Statement|"<varname>" as the minimum number of periods between two non-missing occurrences of "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3085" as the minimum number of periods between two non-missing occurrences of "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:min_delta_time_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:min_delta_time_5D
+|=====================
+
+
+[[average_delta_time]]
+.Average Delta Time
+[cols="20h,80",stripes=none]
+|=====================
+|Function|AVERAGE_DELTA_TIME_BY_CATEGORY
+|Full Form Statement|"<varname>" as the average number of periods between two occurrences of "<categoryValue>" in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3097" as the average number of periods between two occurrences of "Grocery" in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>_<categoryValue>:avg_delta_time_<N><discreteTimeUnit>
+|Output variable name example|account:nonWorkingHoursSpendingOnMerchandise_Y:avg_delta_time_5D
+|=====================
+
+
+[[overall_average_delta_time]]
+.Overall Average Delta Time
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_AVERAGE_DELTA_TIME
+|Full Form Statement|"<varname>" as the average number of periods between two non-missing occurrences of "<categoryField>" category over <timeInterval> "days"
+|Example|"rv3101" as the average number of periods between two non-missing occurrences of "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:avg_delta_time_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:avg_delta_time_5D
+|=====================
+
+
+[[recent_consec_streak]]
+.Recent Consec Streak
+[cols="20h,80",stripes=none]
+|=====================
+|Function|RECENT_CONSECUTIVE_STREAK_BY_CATEGORY
+|Full Form Statement|"<varname>" as the number of consecutive periods including recent of observing "<categoryValue>" in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3057" as the number of consecutive periods including recent of observing "Grocery" in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>_<categoryValue>:recent_consec_streak_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash_Yes:recent_consec_streak_5D
+|=====================
+
+
+[[overall_recent_consec_streak]]
+.Overall Recent Consec Streak
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_RECENT_CONSECUTIVE_STREAK
+|Full Form Statement|"<varname>" as the number of consecutive periods including recent of observing non-missing values in "<categoryField>" category over <timeInterval> "days"
+|Example|"rv3061" as the number of consecutive periods including recent of observing non-missing values in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:recent_consec_streak_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:recent_consec_streak_5D
+|=====================
+
+
+[[periods_with_occurrence]]
+.Periods With Occurrence
+[cols="20h,80",stripes=none]
+|=====================
+|Function|PERIODS_WITH_OCCURRENCE_BY_CATEGORY
+|Full Form Statement|"<varname>" as the number of periods of observing "<categoryValue>" in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3049" as the number of periods of observing "Grocery" in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>_<categoryValue>:periods_occur_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash_Yes:periods_occur_5D
+|=====================
+
+
+[[overall_periods_with_occurrence]]
+.Overall Periods With Occurrence
+[cols="20h,80",stripes=none]
+|=====================
+|Function|OVERALL_PERIODS_WITH_OCCURRENCE
+|Full Form Statement|"<varname>" as the number of periods of observing non-missing values in "<categoryField>" category over <timeInterval> "<timeUnit>"
+|Example|"rv3053" as the number of periods of observing non-missing values in "merchantType" category over 5 "days"
+|Output variable name in explosion|<profile_name>:<categoryField>:periods_occur_<N><discreteTimeUnit>
+|Output variable name example|account:merchantIsCash:periods_occur_5D
+|=====================
+
+
+[[sv_last_value]]
+.SV_LAST_VALUE
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_LAST_VALUE
+|Full Form Statement|"<varname>" as the last value of "<categoryField>" +
+"<varname>" as the last value of "<categoryField>" with value initialized as "<default_value>"
+|Example|"sv001" as the last value of "merchantType"
+|Example with default value override | "sv001" as the last value of "merchantType" with value initialized as "'XXX'"
+|Output variable name in explosion| not supported
+|Output variable name example| not supported
+|=====================
+
+
+[[sv_last_value_by_category]]
+.SV_LAST_VALUE_BY_CATEGORY
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_LAST_VALUE_BY_CATEGORY
+|Full Form Statement|"<varname>" as the last value of "<categoryField>" when "<conditional_field>" is "<conditional_value>" +
+"<varname>" as the last value of "<categoryField>" when "<conditional_field>" is "<conditional_value>" with value initialized as "<default_value>"
+|Example|"sv001" as the last value of "merchantType" when "merchantcode" is "4"
+|Example with default value override | "sv001" as the last value of "merchantType" when "merchantcode" is "4" with value initialized as "'XXX'"
+|Output variable name in explosion| not supported
+|Output variable name example| not supported
+|=====================
+
+
+[[sv_first_value]]
+.SV_FIRST_VALUE
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_FIRST_VALUE
+|Full Form Statement|"<varname>" as the first value of "<categoryField>" +
+"<varname>" as the first value of "<categoryField>" with value initialized as "<default_value>"
+|Example|"sv001" as the first value of "merchantType"
+|Example with default value override | "sv001" as the first value of "merchantType" with value initialized as "'XXX'"
+|Output variable name in explosion| not supported
+|Output variable name example| not supported
+|=====================
+
+
+[[sv_first_value_by_category]]
+.SV_FIRST_VALUE_BY_CATEGORY
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_FIRST_VALUE_BY_CATEGORY
+|Full Form Statement|"<varname>" as the first value of "<categoryField>" when "<conditional_field>" is "<conditional_value>" +
+"<varname>" as the first value of "<categoryField>" when "<conditional_field>" is "<conditional_value>" with value initialized as "<default_value>"
+|Example|"sv001" as the first value of "merchantType" when "merchantcode" is "4"
+|Example with default value override | "sv001" as the first value of "merchantType" when "merchantcode" is "4" with value initialized as "'XXX'"
+|Output variable name in explosion| not supported
+|Output variable name example| not supported
+|=====================
+
+
+The default values for the last value and first value fuctions are as below
+[cols="20h,80",stripes=none]
+|=====================
+|DataType|Default Value
+|Double| NaN
+|Float|NaN
+|Int|Int.MIN_VALUE
+|Long|Long.MIN_VALUE
+|String|""
+|=====================
+
+
+NOTE: Default value for last value function of boolean data type is "false".
+
+IMPORTANT: First value functions are not supported for Boolean data types.
+
+[[sv_sum_value_by_category]]
+.SV_SUM_VALUE_BY_CATEGORY
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_SUM_VALUE_BY_CATEGORY
+|Full Form Statement|"<varname>" as the sum of "<numericalField>" where "<categoryField>" is "<categoryValue>" over all time
+|Example|"sv002" as the sum of "amount" where "merchantType" is "Grocery" over all time
+|Output variable name in explosion|<profile_name>_<numericalField>:<categoryField>_<categoryValue>:total_value_overall
+|Output variable name example|account_amount:merchantType_Cash:total_value_overall
+|=====================
+
+
+[[sv_overall_total_value]]
+.SV_OVERALL_TOTAL_VALUE
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_OVERALL_TOTAL_VALUE
+|Full Form Statement|"<varname>" as the overall sum of "<numericalField>" over all time
+|Example|"sv003" as the overall sum of "amount" over all time
+|Output variable name in explosion|<profile_name>_<numericalField>:all:total_value_overall
+|Output variable name example|account_amount:all:total_value_overall
+|=====================
+
+
+[[sv_frequency_by_category]]
+.SV_FREQUENCY_BY_CATEGORY
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_FREQUENCY_BY_CATEGORY
+|Full Form Statement|"<varname>" as the number of occurrences of "<categoryValue>" in "<categoryField>" category over all time
+|Example|"sv007" as the number of occurrences of "Grocery" in "merchantType" category over all time
+|Output variable name in explosion|<profile_name>:<categoryField>_<categoryValue>:total_count_overall
+|Output variable name example|account:merchantType_Cash:total_count_overall
+|=====================
+
+
+[[sv_overall_frequency]]
+.SV_OVERALL_FREQUENCY
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_OVERALL_FREQUENCY
+|Full Form Statement|"<varname>" as the number of non-missing occurrences of "<categoryField>" category over all time
+|Example|"sv008" as the number of non-missing occurrences of "merchantType" category over all time
+|Output variable name in explosion|<profile_name>:<categoryField>_all:total_count_overall
+|Output variable name example|account:merchantType_all:total_count_overall
+|=====================
+
+
+[[sv_time_on_books_by_category]]
+.SV_TIME_ON_BOOKS_BY_CATEGORY
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_TIME_ON_BOOKS_BY_CATEGORY
+|Full Form Statement|"<varname>" as the number of "<timeUnit>" since the first occurrence of "<categoryValue>" in "<categoryField>" category over all time
+|Example|"sv004" as the number of "Days" since the first occurrence of "Grocery" in "merchantType" category over all time
+|Output variable name in explosion|<profile_name>:<categoryField>_<categoryValue>:time_on_books_in_D_overall
+|Output variable name example|account:merchantType_Cash:time_on_books_in_D_overall
+|Special Value |-1 if no transaction has happened yet
+|=====================
+
+
+[[sv_unique_values_count]]
+.SV_UNIQUE_VALUES_COUNT
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_UNIQUE_VALUES_COUNT
+|Full Form Statement|"<varname>" as the number of distinct occurrences of "<categoryField>" category over all time
+|Example|"sv005" as the number of distinct occurrences of "merchantType" category over all time
+|Output variable name in explosion|<profile_name>:<categoryField>:total_unique_values_overall
+|Output variable name example|account:merchantType:total_unique_values_overall
+|=====================
+
+[[sv_overall_recency]]
+.SV_OVERALL_RECENCY
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_OVERALL_RECENCY
+|Full Form Statement|"<varname>" as the number of "<timeUnit>" since the last non-missing occurrence of "<categoryField>" category over all time
+|Example|"sv006" as the number of "Days" since the last non-missing occurrence of "merchantType" category over all time
+|Output variable name in explosion|<profile_name>:<categoryField>:overall_recency_inD
+|Output variable name example|account:merchantType:overall_recency_inD
+|Special Value |-1 if no transaction has happened yet
+|=====================
+
+[[sv_overall_frequency_by_condition]]
+.SV_OVERALL_FREQUENCY_BY_CONDITION
+[cols="20h,80",stripes=none]
+|=====================
+|Function|SV_OVERALL_FREQUENCY_BY_CONDITION
+|Full Form Statement|"<varname>" as the number of non-missing occurrences of "<condition>" where "<categoryField>" is "<categoryValue>" over all time
+|Example|"sv009" as the number of non-missing occurrences of "amountGt500" where "merchantType" is "Grocery" over all time
+|Output variable name in explosion|not supported
+|Output variable name example|not supported
+|=====================
+

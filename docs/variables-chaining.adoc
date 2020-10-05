@@ -1,0 +1,13 @@
+[[Variable-chaining]]
+
+=== Chaining of profile variables
+With Stream Var release 0.11.0, chaining of the profile variables is supported. What this means is that, the one profile variable can be profiled again to create a new variables.
+
+There is no additional logic required in the feature file for this. This works the same way you would create any other profile variables
+
+IMPORTANT: Cross profile variable can also be chained
+
+[source,gherkin]
+-----
+include::code/cross-profile-and-chaining.feature[tag=variable-chaining]
+-----

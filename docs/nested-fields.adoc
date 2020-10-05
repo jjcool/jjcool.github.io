@@ -1,0 +1,156 @@
+=== Support for nested fields
+
+Following gherkin configuration illustrate support of nested fields in the incoming input record.
+
+[source,gherkin]
+----
+Input Set:
+Given input record "CRTRAN" for online profile record updates, feature generation and scoring
+And input formatted as "json"
+With fields
+| field_name        | data_type         |
+| creditTransaction | CreditTransaction |
+With nested fields for "CreditTransaction"
+| field_name    | data_type     |
+| header        | Header        |
+| creditPayload | CreditPayload |
+
+With nested fields for "Header"
+| field_name                 | data_type |
+| recordType                 | String    |
+| dataSpecificationVersion   | String    |
+| recordCreationDate         | String    |
+| recordCreationTime         | String    |
+| recordCreationMilliseconds | Int       |
+| gmtOffset                  | String    |
+| customerAcctNumber         | String    |
+With nested fields for "CreditPayload"
+| field_name          | data_type |
+| pan                 | String    |
+| cardExpireDate      | String    |
+| availableCredit     | Int       |
+| transactionDate     | String    |
+| transactionType     | String    |
+| mcc                 | String    |
+| merchantCountryCode | String    |
+| merchantName        | String    |
+| merchantCity        | String    |
+| merchantState       | String    |
+| transactionCategory | String    |
+| acquirerId          | String    |
+| acquirerCountry     | String    |
+| terminalId          | String    |
+
+And transform the non standard input record using function "transformCreditTrans" from "examples/nestedfields-udf.kt" into record "CreditData" with following fields
+| field_name         | data_type |
+| recordType         | String    |
+| recordCreationDate | String    |
+| customerAcctNumber | String    |
+| availableCredit    | Int       |
+| merchantName       | String    |
+| transactionType    | String    |
+| transactionDate    | String    |
+----
+
+*Input Fields* : This table contains the top level fields.
+[source,gherkin]
+----
+With fields
+| field_name        | data_type         |
+| creditTransaction | CreditTransaction |
+----
+
+*Nested Fields* : To specify the fields of the custom types present in the top level fields.
+[source,gherkin]
+----
+With nested fields for "CreditTransaction"
+| field_name    | data_type     |
+| header        | Header        |
+| creditPayload | CreditPayload |
+----
+Here "CreditTransaction" is the nested class name and in the data_type section, any primitive or custom type can be provided.
+But for each of the custom type there should be only one field section containing the class fields information.
+
+*Data Source Transformation* : To use the nested fields of the data structure it needs to be transformed into flat data structure.
+Transformation from nested data structure to flattened structure should be done using kotlin UDF function.
+Example is given below -
+
+[source,gherkin]
+----
+And transform the non standard input record using function "transformCreditTrans" from "examples/nestedfields-udf.kt" into record "CreditData" with following fields
+| field_name         | data_type |
+| recordType         | String    |
+| recordCreationDate | String    |
+| customerAcctNumber | String    |
+| availableCredit    | Int       |
+| merchantName       | String    |
+| transactionType    | String    |
+| transactionDate    | String    |
+----
+
+Here "transformCreditTrans" is the function name and "examples/nestedfields-udf.kt" is the file path containing the UDF.
+
+==== Generate Input POJOs (stream-var-io.jar)
+To generate stream-var-io.jar model should be built using build_mar with an argument -l <directory>. Here <directory> is path where stream-var-io.jar will be copied.
+
+*In case of nested fields,* a non-existing file should be provided in the transformation dsl statement so that the stream-var-io.jar can be generated.
+A dummy UDF will also be printed on the console for reference. Following dummy UDF is generated using the given input -
+
+.Transformation dsl statement
+[source,gherkin]
+----
+And transform the non standard input record using function "transformCreditTrans" from "non-existing-file-name.kt" into record "CreditData" with following fields
+----
+
+.Generated dummy UDF
+[source,kotlin]
+----
+//WARN : Kotlin file "non-existing-file-name.kt" doesn't exist! Create a kotlin file  "non-existing-file-name.kt" with the following sample udf.
+fun transformCreditTrans(input: com.fico.analytics.io.input.CRTRAN): com.fico.analytics.io.input.CreditData {
+  val output = com.fico.analytics.io.input.CreditData()
+  // Please write the transformation logic here
+  return output
+}
+----
+
+.UDF description
+[cols="20,80",stripes=none]
+|=====================
+| package name where input POJOs exist. | com.fico.analytics.io.input.*
+| function name                         | transformCreditTrans
+| incoming data record class name       | com.fico.analytics.io.input.CRTRAN
+| transformed data record class name    | com.fico.analytics.io.input.CreditData
+|=====================
+
+==== Rules to write the custom udf for data source transformation
+To write UDF all the required POJOs should be used from the stream-var-io.jar.
+
+NOTE: Model is required to build twice to use nested fields. In the first run model will generate stream-var-io.jar which is required to build the custom UDF.
+Now add the file path containing custom UDF in the feature file and build the final model.
+
+Custom UDF which will take the Top level object as an argument (containing nested fields) and return the transformed object containing only non-nullable primitive data types
+Here are key points to write udf for data sources transformation.
+
+1. UDF should take only a single argument as the data source class from stream-var-io.jar.
+2. UDF will return the transformed data source class present in the stream-var-io.jar.
+3. All the null or empty checks should be performed in the udf. Default value assignment should also be done in the UDF wherever required.
+4. For transformation logic any native library function can be used.
+
+Here is the complete udf implementation in kotlin language -
+
+[source,kotlin]
+----
+import com.fico.analytics.io.input.*;
+
+fun transformCreditTrans(input: com.fico.analytics.io.input.CRTRAN): com.fico.analytics.io.input.CreditData {
+    val output = com.fico.analytics.io.input.CreditData()
+    output.recordType = input.creditTransaction?.header?.recordType?:"Unknown"
+    output.recordCreationDate = input.creditTransaction?.header?.recordCreationDate?:"Unknown"
+    output.customerAcctNumber = input.creditTransaction?.header?.customerAcctNumber?:"Unknown"
+    output.availableCredit = input.creditTransaction?.creditPayload?.availableCredit?:-9999
+    output.merchantName = input.creditTransaction?.creditPayload?.merchantName?:"Unknown"
+    output.transactionType = input.creditTransaction?.creditPayload?.transactionType?:"Unknown"
+    output.transactionDate = input.creditTransaction?.creditPayload?.transactionDate?:"Unknown"
+    return output
+}
+----

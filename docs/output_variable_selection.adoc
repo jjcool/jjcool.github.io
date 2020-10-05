@@ -1,0 +1,30 @@
+[[output-variable-selection]]
+=== Output Variable Selection
+
+This feature provides functionality to select variables in the output. There are 2 filters which you can use to filter the output variables.
+
+*Select* - You can use this filter if you want specific variables from the all the generated variables. You need to provide the name of the variables you want in the output file.
+
+    Then output select values
+    | value_name        |
+    | valueLeq200       |
+    | product           |
+
+*All* - To calculate all the variable mentioned anywhere in the gherkin i.e. Prepared,Profile,Ratio etc.
+
+    Then output all values
+
+// this information is now provided in the input and output set.
+//=== Variable generation
+//
+//*On Demand* Variables get generated only on demand i.e variables will only be calculated when the special record(<<variable-requests-record,variable requests record>>) is given.
+//
+//    Then output "all" variables "only on demand"
+//
+//*For every transaction* Variables get generated for every record in the input.
+//
+//    Then output "all" variables "every input record"
+//
+//NOTE: In case of variable request record, only the profiled variables and variables dependent on only profiled variables can be generated.
+// Input field or any other pre/post processing fields involving input fields can't be generated.
+//

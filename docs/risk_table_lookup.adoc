@@ -1,0 +1,90 @@
+== Risk Lookup
+
+=== Generic Risk Lookup
+StreamVar supports full form statement for generic risk lookup. Sample full form statements -
+
+[source,gherkin]
+----
+include::code/sample.feature[tag=genericlookup]
+----
+
+Here is the sample risk table format -
+
+[source,json]
+------
+{
+ "key1": 100,
+ "key2": 12.55,
+ "key3": 1000,
+ "_DEFAULT" : 9999999,
+ "_MISSING" : -9999999
+}
+------
+
+=== Falcon Style Risk Lookup
+StreamVar supports falcon style one dimensional risk table lookup.
+
+	Falcon style one dimensional risk table has below columns (in order)
+    "risksmooth",
+    "riskcalib",
+    "woe",
+    "nfmeanamt",
+    "nfstdamt",
+    "nfmeandist",
+    "nfstddist"
+
+Any of the above column can be specified for the lookup. +
+Risk table lookup file has the below structure
+
+[source,json]
+----
+	{
+	  "values": {
+	    "DEFAULT": [
+	      0.015593,
+	      0.015593,
+	      1.045857,
+	      81.43,
+	      215.53,
+	      66.3,
+	      684.7
+	    ],
+	    "   000   ": [
+	      0.015593,
+	      0.015593,
+	      1.045857,
+	      81.43,
+	      215.53,
+	      66.3,
+	      684.7
+	    ]
+  	  }
+  	}
+----
+
+If the requested key is not found in the lookup table, corresponding value from the DEFAULT will be returned.
+Below is the sample statement in the feature file that enables the risk table lookup
+
+[source,gherkin]
+----
+include::code/sample.feature[tag=falconlookup]
+----
+
+Here, "riskcalib” and “woe” are the columns to be looked up from the lookup table for “mcc_riskcalib” and “country_woe” respectively. 
+This can be changed to any of the other column of interest.
+
+*examples/risk1d.txt* is the configurable risk table in the same structure as above.
+
+lookup_key is the field whose value is to be lookup up in the risk table. This can be any of input fields or prepared fields (intermediate fields).
+
+If this lookup key is the concatenation of the fields, then intermediate field can be generated in the prepared step with the below example statement
+
+[source,gherkin]
+----
+Prepare additional fields for input data source "Accounts"
+With "risk_lookup_key" as the concatenation of "field1, field2" using separator ""
+----
+
+Example feature file included with the package *examples/sv_dsl.json.riskvar.feature*
+
+NOTE: This feature file only demonstrate the gherkins statement, it doesn’t have the sensible risk lookup configuration

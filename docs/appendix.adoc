@@ -1,0 +1,61 @@
+=== Description of StreamVar Functions
+
+IMPORTANT: Special values are provided only for the functions that give a special value.
+
+include::aarf_functions.adoc[]
+
+<<<
+
+=== Blist variable functions
+
+[[blist_rank]]
+.BLIST_RANK
+[cols="20h,80",stripes=none]
+|=====================
+|Function|BLIST_RANK
+|Full Form Statement|"<varname>" as the rank of "<blist_key>" where "<update_field>" is "<update_field_value>" in a blist of size 5
+|Example a| * "rv3083" as the rank of "merchantcode" where "merchantType" is "Grocery" in a blist of size 5
+* "rv3084" as the rank of "merchantcode" in a blist of size 5
+|Output variable name in explosion|<profile_name>_<blist_key>:<update_field>_<update_field_value>:blist_rank_<size>L
+|Output variable name example|account_merchantcode:merchantIsCash_Yes:blist_rank_8L
+|=====================
+
+[[blist_weight]]
+.BLIST_WEIGHT
+[cols="20h,80",stripes=none]
+|=====================
+|Function|BLIST_WEIGHT
+|Full Form Statement|"<varname>" as the weight of "<blist_key>" where "<update_field>" is "<update_field_value>" in a blist of size 5
+|Example a| * "rv3085" as the weight of "merchantcode" where "merchantType" is "Grocery" in a blist of size 5
+* "rv3086" as the weight of "merchantcode" in a blist of size 5
+|Output variable name in explosion|<profile_name>_<blist_key>:<update_field>_<update_field_value>:blist_weight_<size>L
+|Output variable name example|account_merchantcode:merchantIsCash_Yes:blist_weight_8L
+|=====================
+
+[[blist_is_hit]]
+.BLIST_IS_HIT
+[cols="20h,80",stripes=none]
+|=====================
+|Function|BLIST_IS_HIT
+|Full Form Statement|"<varname>" to indicate the presence of "<blist_key>" where "<update_field>" is "<update_field_value>" in a blist of size 5
+|Example a| * "rv3087" to indicate the presence of "merchantcode" where "merchantType" is "Grocery" in a blist of size 5
+* "rv3088" to indicate the presence of "merchantcode" in a blist of size 5
+|Output variable name in explosion|<profile_name>_<blist_key>:<update_field>_<update_field_value>:blist_is_hit_<size>L
+|Output variable name example|account_merchantcode:merchantIsCash_Yes:blist_is_hit_4L
+|=====================
+
+[[blist_is_miss]]
+.BLIST_IS_MISS
+[cols="20h,80",stripes=none]
+|=====================
+|Function|BLIST_IS_MISS
+|Full Form Statement|"<varname>" to indicate the absence of "<blist_key>" where "<update_field>" is "<update_field_value>" in a blist of size 5
+|Example a| * "rv3089" to indicate the absence of "merchantcode" where "merchantType" is "Grocery" in a blist of size 5
+* "rv3090" to indicate the absence of "merchantcode" in a blist of size 5
+|Output variable name in explosion|<profile_name>_<blist_key>:<update_field>_<update_field_value>:blist_is_miss_<size>L
+|Output variable name example|account_merchantcode:merchantIsCash_Yes:blist_is_miss_4L
+|=====================
+
+=== Stateless Operations
+
+include::stateless_operations.adoc[]

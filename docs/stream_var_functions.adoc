@@ -1,0 +1,66 @@
+[[variable-functions]]
+=== Arithmetic Accurate Functions
+For detailed explanation click on the function name.
+
+* <<minimum,minimum_by_category>>
+* <<overall_minimum,overall_minimum>>
+* <<maximum,maximum_by_category>>
+* <<overall_maximum,overall_maximum>>
+* <<sum,sum_by_category>>
+* <<overall_sum,overall_sum>>
+* <<frequency,frequency_by_category>>
+* <<overall_frequency,overall_frequency>>
+* <<stddev,stddev_by_category>>
+* <<overall_stddev,overall_stddev>>
+* <<time_average,time_average_by_category>>
+* <<overall_time_average,overall_time_average>>
+* <<event_average,event_average_by_category>>
+* <<overall_event_average,overall_event_average>>
+* <<recency,recency_by_category>>
+* <<overall_recency,overall_recency>>
+* <<penultimate_recency,penultimate_recency_by_category>>
+* <<overall_penultimate_recency,overall_penultimate_recency>>
+* <<unique_val_count,unique_values_count>>
+* <<latest_value,latest_value_for_field>>
+* <<max_consec_streak,maximum_consecutive_streak_by_category>>
+* <<overall_max_consec_streak,overall_maximum_consecutive_streak>>
+* <<min_consec_streak,minimum_consecutive_streak_by_category>>
+* <<overall_min_consec_streak,overall_minimum_consecutive_streak>>
+* <<max_delta_time,maximum_delta_time_by_category>>
+* <<overall_max_delta_time,overall_maximum_delta_time>>
+* <<min_delta_time,minimum_delta_time_by_category>>
+* <<overall_min_delta_time,overall_minimum_delta_time>>
+* <<average_delta_time,average_delta_time_by_category>>
+* <<overall_average_delta_time,overall_average_delta_time>>
+* <<recent_consec_streak,recent_consecutive_streak_by_category>>
+* <<overall_recent_consec_streak,overall_recent_consecutive_streak>>
+* <<periods_with_occurrence,periods_with_occurrence_by_category>>
+* <<overall_periods_with_occurrence,overall_periods_with_occurrence_by_category>>
+
+=== Running Value Functions
+
+* <<sv_last_value,sv_last_value>>
+* <<sv_last_value_by_category,sv_last_value_by_category>>
+* <<sv_first_value,sv_first_value>>
+* <<sv_first_value_by_category,sv_first_value_by_category>>
+* <<sv_sum_value_by_category,sv_sum_value_by_category>>
+* <<sv_overall_total_value,sv_overall_total_value>>
+* <<sv_frequency_by_category,sv_frequency_by_category>>
+* <<sv_overall_frequency,sv_overall_frequency>>
+* <<sv_time_on_books_by_category,sv_time_on_books_by_category>>
+* <<sv_unique_values_count,sv_unique_values_count>>
+* <<sv_overall_recency,sv_overall_recency>>
+* <<sv_overall_frequency_by_condition,sv_overall_frequency_by_condition>>
+
+=== Blist Functions
+
+* <<blist_rank,blist_rank>>
+* <<blist_weight,blist_weight>>
+* <<blist_is_hit,blist_is_hit>>
+* <<blist_is_miss,blist_is_miss>>
+
+=== QE Functions
+
+* <<QE_scaled_vale,Scaled value>>
+* <<Log-odds, Logodds of estimated cumulative probability>>
+* <<quantile_estimate,Value Estimation at given Quantile>>

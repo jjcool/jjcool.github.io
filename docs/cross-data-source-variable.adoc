@@ -1,0 +1,95 @@
+[[cross-profile]]
+
+=== Cross data source/profile variable access
+With release 0.10.0 (onwards), Stream Var supports accessing the variables from one data source(or one profile)to another.
+
+.Each data source can have two types of profile
+1. Write profile
+2. Read profile
+
+Write profiles are the ones that the given data source can mutate. +
+Read profiles are the ones that the given data source can only read.
+
+
+One data source can write to multiple profiles and read from multiple profiles.
+
+==== Write Profiles
+
+===== 1. Single data source writing to multiple profiles
+[source,gherkin]
+-----
+include::code/cross-profile-and-chaining.feature[tag=single-source-multiple-profiles]
+-----
+
+===== 2. Single data source writing to multiple partitions of the same profile
+
+[source,gherkin]
+-----
+include::code/cross-profile-and-chaining.feature[tag=single-source-multiple-partions-same-profile]
+-----
+
+===== 3. Multiple data sources writing to different partitions of the same profile :
+
+The profiles are partitioned by data source
+[source,gherkin]
+-----
+include::code/cross-profile-and-chaining.feature[tag=multiple-source-writing-to-same-profiles]
+-----
+
+In the example above, the Person profile is updated by two sources "eft" and "person_address".
+Note though that the profile is partitioned, and the profile partitions updated by the two sources are distinct.
+
+IMPORTANT: One profile partition can only be updated by one data source.
+
+
+==== Read Profiles
+
+===== 1. Read profile in one data source updated by another data source.
+
+To access the variables from one data source or one profile partition to another data source/profile partitions, we need to define the read access tp those profiles/partitions
+[source,gherkin]
+-----
+include::code/cross-profile-and-chaining.feature[tag=read-profile-cross-datasource]
+-----
+
+IMPORTANT: 1. Every partition of a profile must be assigned a name (previously referred to as the `alias`) that is globally unique. Names assigned to read-only partitions must also be globally unique. +
+2. Date variables are only mandatory if the set of selected variables contains variables that implicitly depend on the current date of the transaction (e.g. AARF variables, delta time etc.)
+
+
+IMPORTANT: Users must also configure read-only access to profiles for variable requests
+
+
+
+==== Cross data source and Cross profile variables
+
+
+Cross data source/profile variable can be  accessed by using the profile accessor ( profile alias) followed by ```::``` and variable name
+
+===== 1. Cross data source variables that are chained using stateless transformations
+
+[source,gherkin]
+-----
+include::code/cross-profile-and-chaining.feature[tag=cross-data-source-variable-access]
+-----
+
+===== 2. Cross profile variables that are chained using stateless transformations
+[source,gherkin]
+-----
+include::code/cross-profile-and-chaining.feature[tag=cross-profile-variable-access]
+-----
+
+* `receiverGeoData::lastCountry` is a cross data source profiled variable that was profiled using a full form statement for the `geo` data source. But to access it within the `eft` data source
+the user must use the variable reference `<read-only-profile-partition-name>::<original-variable-name>` where the `<read-only-profile-partition-name>` is `receiverGeoData` and the
+    `original-variable-name` is `lastCountry` in this example
+*  Likewise for the variable `senderGeoData::geoUser:country:uniq_count_4D_1L`. Here the `<read-only-profile-partition-name>` is `senderGeoData` in the `eft` data source and the
+    `original-variable-name` is `geoUser:country:uniq_count_4D_1L` - a variable derived from a variable explosion for the `geo` data source
+
+
+IMPORTANT: 1. Only profiled variables can be accessed across data source boundaries. +
+2. Input derived stateless variables cannot be accessed across data source boundaries.
+
+Hence the configurations for profiling `geoUser:country:uniq_count_4D_1L` are contained within a variable set for the `geo` data source but the configurations for calculating `isFrequentTraveller`
+are contained withing a variable set for the `eft` data source.
+
+
+Example feature file ```sv_dsl.json.cross_profile.feature``` is provided in the MDK.

@@ -1,0 +1,13 @@
+[[parameter-set]]
+=== Parameter Set
+
+This section is used when ratio variables are to be generated.
+To generate ratio variables you need to specify parameter sets for the data source on which you want to calculate the ratio variables. Parameter sets configurations are like variable outlines, except they need a parameter name for ex. mysetA and variable function is not specified in the  Parameter Set
+. It is specified in the <<ratio-variable-config,Ratio config>>
+
+[NOTE]
+Here *account* is the profile alias which we created in the input sets section.
+[source,gherkin]
+----
+include::code/sample.feature[tag=parameterset]
+----

@@ -1,0 +1,19 @@
+== Anatomy of a Feature File
+There are multiple sections in StreamVar feature file to configure.
+
+include::input_set.adoc[]
+
+<<<
+include::output_set.adoc[]
+
+<<<
+include::profile_set.adoc[]
+
+<<<
+include::parameter_set.adoc[]
+
+<<<
+include::stateless_variables.adoc[]
+
+<<<
+include::variable_outline.adoc[]

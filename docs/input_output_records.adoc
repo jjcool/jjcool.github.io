@@ -1,0 +1,92 @@
+== Record Types
+
+Stream Var supports records in Container Record Format. Detailed description about container record and their attributes is given below - +
+
+=== Input Record
+
+Input record comprises of two parts, one is recordName and other is payload/payloadString.
+
+* recordName : name of the datasource
+* payload : json format input record
+* payloadString : csv format input record
+
+.JSON
+[source,json]
+----
+{"recordName" : "Accounts","payload" : {"accountid":"A_0","merchantcode":4,"amount":204.4641734088032,"date":"1/1/2006 01:00:55","merchantGroup":"Luxury","merchantType":"FastFood","transactionid":"TR000-1","srNo":1,"nonWorkingHoursSpendingOnMerchandise":"Y"}}
+----
+
+.CSV
+[source,json]
+----
+{"recordName" : "Accounts", "payloadString" : "A_0, 10, 510.02074093089146, 1/1/2006 01:00:55, Airline, FastFood, TR000-1, 1, Y"}
+----
+
+=== Variable Request
+StreamVar supports this type of record to generate the variables on demand for a given data source, profile id and date.
+
+NOTE: Variable Request record should always be provided in the json format (for both csv and json data record)
+
+* recordName : datasource name:VariableRequest
+* payload : fields required for on demand variable request
+
+[source,json]
+----
+{"recordName" : "Accounts:VariableRequest", "payload" : { "dataSource" : "Accounts", "profileIdField" : "accountid", "profileIdFieldValue" : "A_2", "queryDate":"1/1/2006 01:00:55", "transactionID" : "0001"}}
+----
+
+=== Schema Request
+This type of record is to generate the schema of the output response when the output format is CSV.
+NOTE: Schema request is not supported for JSON output format. Schema response can differ for transaction record and variable request record hence needs to be requested separately.
+
+* recordName : SchemaRequest
+* payload : datasource name
+
+[source,json]
+----
+{"recordName" : "SchemaRequest", "payload" : { "dataSource" : "Accounts"}}
+{"recordName" : "SchemaRequest", "payload" : { "dataSource" : "Accounts:VariableRequest"}}
+----
+
+[[output_records]]
+=== Output Record
+
+Output records also have the same format as input records. They contain recordName, payload/payloadString, errors(if any), warnings(if any).
+
+==== Variable Response Record
+
+** recordName - datasource_name:VariableResponse (if variables are calculated for every input record) / datasource_name:VariableRequest:VariableResponse (if variables are calculate on demand)
+
+** payload - output variables in json format
+
+** payloadString - output variables in csv format
+
+** errors - error codes and messages
+
+** warnings - warning codes and messages
+
+
+.CSV
+[source,json]
+----
+{"recordName":"Accounts:VariableResponse","payloadString":"1/1/2006 01:00:55,A_3,0.0,533.0438129685848,1,0,-1,NaN,true,100,false,true,543.0438129685848,1520,66630.4766210731,1.045857,0.015593,Accounts"}
+{"recordName":"Accounts:VariableRequest:VariableResponse","payloadString":"1/1/2006 01:00:55,A_2,0.0,623.9923216497558,2,0,-1,NaN,1520,Accounts"}
+{"recordName":"Accounts:VariableRequest:SchemaResponse","payloadString":"Da te:String,accountid:String,account_amount:merchantIsCash_Yes:event_avg_1D:Double,account_amount:merchantIsCash_No:event_avg_1D:Double,account_amount:groceryOrGas_Yes:event_avg_1D:Double,account_amount:luxuryOrAirlineGt500_Yes:event_avg_1D:Double,account_amount:nonWorkingHoursSpendingOnMerchandise_Y:event_avg_1D:Double,account_amount:merchantIsCash_Yes:event_avg_2D:Double,account_amount:merchantIsCash_No:event_avg_2D:Double,account_amount:groceryOrGas_Yes:event_avg_2D:Double,account_amount:luxuryOrAirlineGt500_Yes:event_avg_2D:Double,account_amount:nonWorkingHoursSpendingOnMerchandise_Y:event_avg_2D:Double,account_amount:merchantIsCash_Yes:event_avg_1D_5L:Double,account_amount:merchantIsCash_No:event_avg_1D_5L:Double,account_amount:groceryOrGas_Yes:event_avg_1D_5L:Double,account_amount:luxuryOrAirlineGt500_Yes:event_avg_1D_5L:Double,account_amount:nonWorkingHoursSpendingOnMerchandise_Y:event_avg_1D_5L:Double,account:merchantIsCash_Yes:freq_1D:Int,account:merchantIsCash_No:freq_1D:Int,account:groceryOrGas_Yes:freq_1D:Int,account:luxuryOrAirlineGt500_Yes:freq_1D:Int,account:nonWorkingHoursSpendingOnMerchandise_Y:freq_1D:Int,account:merchantIsCash_Yes:freq_2D:Int,account:merchantIsCash_No:freq_2D:Int,account:groceryOrGas_Yes:freq_2D:Int,account:luxuryOrAirlineGt500_Yes:freq_2D:Int,account:nonWorkingHoursSpendingOnMerchandise_Y:freq_2D:Int,account:merchantIsCash_Yes:freq_1D_5L:Int,account:merchantIsCash_No:freq_1D_5L:Int,account:groceryOrGas_Yes:freq_1D_5L:Int,account:luxuryOrAirlineGt500_Yes:freq_1D_5L:Int,account:nonWorkingHoursSpendingOnMerchandise_Y:freq_1D_5L:Int,__data_event_type__:String"}
+----
+
+.JSON
+[source,json]
+----
+{"recordName":"Accounts:VariableResponse","payload":{"date":"1/1/2006 01:00:55","accountid":"A_2","account_amount:merchantIsCash_Yes:event_avg_1D":0.0,"account_amount:all:min_1D":623.9923216497558,"account:luxuryOrAirlineGt500_No:freq_2D":1,"account:nonWorkingHoursSpendingOnMerchandise:min_delta_time_1D":0,"account:merchantIsCash_Yes:recency_1D":-1,"account_amount:luxuryOrAirlineGt500_Yes:min_30D_7L::account_amount:luxuryOrAirlineGt500_Yes:max_30D_7L":"NaN","account_merchantcode:all:blist_is_miss_5L":true,"binnedAmount":100,"amountEqualTo10":false,"amountGreaterThan12":true,"amountPlus10":633.9923216497558,"amount1PlusAmount2":1520,"amount1MultiplyAmount2":77999.04020621948,"countryWOE":1.045857,"postLookup":0.015593,"__data_event_type__":"Accounts"}}
+{"recordName":"Accounts:VariableRequest:VariableResponse","payload":{"date":"1/1/2006 01:00:55","accountid":"A_2","account_amount:merchantIsCash_Yes:event_avg_1D":0.0,"account_amount:all:min_1D":623.9923216497558,"account:luxuryOrAirlineGt500_No:freq_2D":2,"account:nonWorkingHoursSpendingOnMerchandise:min_delta_time_1D":0,"account:merchantIsCash_Yes:recency_1D":-1,"account_amount:luxuryOrAirlineGt500_Yes:min_30D_7L::account_amount:luxuryOrAirlineGt500_Yes:max_30D_7L":"NaN","amount1PlusAmount2":1520,"__data_event_type__":"Accounts"}}
+----
+
+==== Error response record
+Error response record contains error codes and messages. They can have warnings also (if there are any). Following is a sample record -
+
+[source,json]
+----
+{"recordName":"ErrorResponse","errors":[{"code":"200","message":"duplicate transaction for A_2"}]}
+{"recordName":"ErrorResponse","warnings":[{"code":"101","message":"warning The amount is too high"},{"code":"200","message":"probably a duplicate transaction"}],"errors":[{"code":"200","message":"duplicate transaction for A_2"}]}
+
+----

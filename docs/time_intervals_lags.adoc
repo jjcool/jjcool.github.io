@@ -1,0 +1,61 @@
+[[time-increments-and-lags]]
+=== Time Intervals and Lags
+Time increment is used to define the window of last <N> discrete time unit in the variable calculation from the current discrete time unit (inclusive). For example, if the variable is to be calculated for last 3 days, 10 days and 12 days, then the same has to be specified in the feature file under variable outline section.
+
+By default, window is defined from the given query date. So, if the query date is 12 Dec 2018 and Variable is to be calculated for last 3 days then the window consists of *“10 Dec, 11 Dec and 12 Dec”*. 
+
+*Lag:* is the facility to adjust the variable calculation window from the query date. In the above example if the query date is 12Dec and variable calculation for last 3 days is required but skipping the query date from calculation i.e. 9th Dec 10th Dec 11th Dec. Here the time increment is 3 and lag is 1.
+
+Here is the pictorial representation of time increments with and without lag in variable calculation window
+
+*Case 1.* When only time increment is given =>
+
+image::time_no_lag.jpg[]
+
+*Case 2.* When time increment, and lag is given =>
+
+image::time_with_lag.jpg[]
+
+Here Lag is used to skip recent <M> discrete time units in the variable calculation.
+
+Below is sample gherkin configuration to specify the time increment and lag for variable calculation
+
+*Configuring lag value in explosion format*
+
+[source,gherkin]
+----
+include::code/sample.feature[tag=variableoutline]
+----
+
+*Configuration lag value in full form*
+
+[source,gherkin]
+----
+Variable Set:
+Calculate profiled variables for the "account" when the input datasource is "Accounts"
+Add "rv3047" as the number of periods of observing "'Grocery'" in "merchantType" category over 5 "days" lagged by 1 "day"
+----
+
+=== Time Unit
+
+This describes the fundamental unit for the calculation of any StreamVar variable.
+If the variable calculation is to be done on daily basis for example sum of amount in last 3 Days then the discretization unit needs to be specified as “Days”. On the other hand if sum of amount for last 3 years is to be calculated then discretization unit should be provided as “Years”.
+Time unit can be specified along with time intervals and lags
+
+For variable explosion -
+[source,gherkin]
+----
+include::code/sample.feature[tag=time_unit_lag]
+----
+
+For full form -
+[source,gherkin]
+-----
+include::code/sample.feature[tag=fullformstmt]
+-----
+
+	Below are the supported discretization units in StreamVar
+	- Days
+	- Weeks
+	- Months
+	- Years
